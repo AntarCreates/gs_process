@@ -1,7 +1,7 @@
 # gs_processing
 
 
-This project implements a simple pipeline for point cloud processing using **Open3D** and **DVC** for reproducibility. The pipeline has three key stages: dataloader, plane segmentation using RANSAC, and clustering using DBSCAN. All configurations are managed via the `params.yaml` file.
+A simple pipeline for point cloud processing using **Open3D** and **DVC** for reproducibility. The demo uses a point cloud scene processed from a Gaussian Splat. The pipeline has three key stages: dataloader, plane segmentation using RANSAC, and clustering using DBSCAN. All configurations are managed via the `params.yaml` file.
 
 ## Project Structure
 ```
