@@ -1,5 +1,5 @@
 from gs_process.pipeline.dataloader import Dataloader
-from gs_process.utils.common import*
+from gs_process.utils.common import *
 
 
 class RANSACProcessor:
@@ -23,16 +23,16 @@ class RANSACProcessor:
             pcl (open3d.geometry.PointCloud): Input point cloud to process.
         """
         # Set up parameters for RANSAC from params.yaml
-        distance_threshold = self.params['segment_plane']['distance_threshold']
-        ransac_n = self.params['segment_plane']['ransac_n']
-        num_iterations = self.params['segment_plane']['num_iterations']
+        distance_threshold = self.params["segment_plane"]["distance_threshold"]
+        ransac_n = self.params["segment_plane"]["ransac_n"]
+        num_iterations = self.params["segment_plane"]["num_iterations"]
 
         # Detect planes and shapes using RANSAC
         print("Applying RANSAC...")
         plane, object_indices = pcl.segment_plane(
-            distance_threshold=distance_threshold, 
-            ransac_n=ransac_n, 
-            num_iterations=num_iterations
+            distance_threshold=distance_threshold,
+            ransac_n=ransac_n,
+            num_iterations=num_iterations,
         )
 
         # Extract object and noise clouds
@@ -40,9 +40,9 @@ class RANSACProcessor:
         noise_cloud = pcl.select_by_index(object_indices, invert=True)
 
         # Paint the detected shapes and noise cloud with colors from params.yaml
-        object_color = self.params["segment_plane"]['colors']['object_cloud']
-        noise_color = self.params["segment_plane"]['colors']['noise_cloud']
-        
+        object_color = self.params["segment_plane"]["colors"]["object_cloud"]
+        noise_color = self.params["segment_plane"]["colors"]["noise_cloud"]
+
         object_cloud.paint_uniform_color(object_color)
         noise_cloud.paint_uniform_color(noise_color)
 
@@ -56,9 +56,13 @@ class RANSACProcessor:
                 os.makedirs(output_dir)
 
             # Save object cloud and noise cloud
-            object_output_file = os.path.join(output_dir, f"{input_name}_ransac_object.ply")
-            noise_output_file = os.path.join(output_dir, f"{input_name}_ransac_noise.ply")
-            
+            object_output_file = os.path.join(
+                output_dir, f"{input_name}_ransac_object.ply"
+            )
+            noise_output_file = os.path.join(
+                output_dir, f"{input_name}_ransac_noise.ply"
+            )
+
             o3d.io.write_point_cloud(object_output_file, object_cloud)
             o3d.io.write_point_cloud(noise_output_file, noise_cloud)
 
@@ -67,6 +71,7 @@ class RANSACProcessor:
 
         # Visualize the object and noise clouds (optional)
         # o3d.visualization.draw_geometries([object_cloud, noise_cloud])
+
 
 if __name__ == "__main__":
     # Initialize Dataloader and RANSACProcessor

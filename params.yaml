@@ -10,7 +10,7 @@ estimate_normals:
 
 # Parameters for RANSAC segmentation
 segment_plane:
-  distance_threshold: 400.16  # Threshold distance to the plane
+  distance_threshold: 300.16  # Threshold distance to the plane
   ransac_n: 5  # Number of points to fit a plane
   num_iterations: 1000  # Maximum number of iterations for RANSAC
   colors:  # Colors for the object and noise clouds

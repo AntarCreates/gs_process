@@ -5,12 +5,12 @@ stages:
     deps:
     - path: params.yaml
       hash: md5
-      md5: 773b66b3b5583acc970ce9f9c7ccbc07
+      md5: 7bafca40fc7acfd3a58f91ea83d1a07d
       size: 849
     - path: src/gs_process/pipeline/dataloader.py
       hash: md5
-      md5: 5248bf53283ba73eeebb052d012a3213
-      size: 3740
+      md5: f8ffc899a29485af6fd0304e8f2c3148
+      size: 3925
     outs:
     - path: output/cave_normalized.ply
       hash: md5
@@ -25,38 +25,38 @@ stages:
       size: 846049
     - path: params.yaml
       hash: md5
-      md5: 773b66b3b5583acc970ce9f9c7ccbc07
+      md5: 7bafca40fc7acfd3a58f91ea83d1a07d
       size: 849
     - path: src/gs_process/pipeline/ransac.py
       hash: md5
-      md5: c939447983e88514ee53bf0e977eb596
-      size: 3237
+      md5: d881be24eff77cf5070340ac3511e4b2
+      size: 3278
     outs:
     - path: output/cave_normalized_ransac_noise.ply
       hash: md5
-      md5: 5aae2b5382ce88b56d49ba762f4d53ba
-      size: 5771
+      md5: dafcb7ec87a3ba9736e542f3a5f8ca2d
+      size: 9035
     - path: output/cave_normalized_ransac_object.ply
       hash: md5
-      md5: c1a8870059e78534a48770904b3874b9
-      size: 840541
+      md5: 9aee6980a01a5da1d085fd02268fe34b
+      size: 837277
   dbscan:
     cmd: python src/gs_process/pipeline/dbscan.py
     deps:
     - path: output/cave_normalized_ransac_object.ply
       hash: md5
-      md5: c1a8870059e78534a48770904b3874b9
-      size: 840541
+      md5: 9aee6980a01a5da1d085fd02268fe34b
+      size: 837277
     - path: params.yaml
       hash: md5
-      md5: 773b66b3b5583acc970ce9f9c7ccbc07
+      md5: 7bafca40fc7acfd3a58f91ea83d1a07d
       size: 849
     - path: src/gs_process/pipeline/dbscan.py
       hash: md5
-      md5: 755cfeb2db181a84c645599868f397f3
-      size: 2450
+      md5: cdc722b849ad10f8ae78e785ab4b6584
+      size: 2381
     outs:
     - path: output/cave_dbscan.ply
       hash: md5
-      md5: 3549fa1fab672071e2cd2b0615c0b287
-      size: 840541
+      md5: 8fac0ad640c29eecee4694cb294a1aea
+      size: 837277

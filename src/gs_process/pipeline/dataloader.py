@@ -1,26 +1,32 @@
-from gs_process.utils.common import*
+from gs_process.utils.common import *
 import open3d as o3d
 import os
 import yaml
 
+
 class Dataloader:
-    def __init__(self, config=config, params=params, ransac=False, dbscan= False):
+    def __init__(self, config=config, params=params, ransac=False, dbscan=False):
         """
-        Initialize the Dataloader class.
-.
+                Initialize the Dataloader class.
+        .
         """
 
         self.normalize = config["process"]["normalize"]  # Whether to normalize
-        self.save_norm = config["process"]["save_norm"]  # Whether to save the normalized point cloud
+        self.save_norm = config["process"][
+            "save_norm"
+        ]  # Whether to save the normalized point cloud
         self.params = params  # Store the parameters
 
         if ransac and self.save_norm:
-            self.pcl_path = config["norm_pcl_path"]  # Path to the normalized point cloud file
+            self.pcl_path = config[
+                "norm_pcl_path"
+            ]  # Path to the normalized point cloud file
         elif dbscan:
-            self.pcl_path = config["ransac_pcl_path"]  # Path to the normalized ransac point cloud file
+            self.pcl_path = config[
+                "ransac_pcl_path"
+            ]  # Path to the normalized ransac point cloud file
         else:
-            self.pcl_path = config["pcl_path"] #raw pcl
-
+            self.pcl_path = config["pcl_path"]  # raw pcl
 
     def load_point_cloud(self):
         """
@@ -43,16 +49,20 @@ class Dataloader:
         """
         if self.normalize:
             # Set up parameters for estimate_normals from params.yaml
-            search_param = self.params['estimate_normals']['search_param']
-            radius = search_param['radius']
-            max_nn = search_param['max_nn']
-            fast_normal_computation = self.params['estimate_normals']['fast_normal_computation']
+            search_param = self.params["estimate_normals"]["search_param"]
+            radius = search_param["radius"]
+            max_nn = search_param["max_nn"]
+            fast_normal_computation = self.params["estimate_normals"][
+                "fast_normal_computation"
+            ]
 
             # Estimate normals for the point cloud
             print("Estimating normals...")
             pcl.estimate_normals(
-                search_param=o3d.geometry.KDTreeSearchParamHybrid(radius=radius, max_nn=max_nn), 
-                fast_normal_computation=fast_normal_computation
+                search_param=o3d.geometry.KDTreeSearchParamHybrid(
+                    radius=radius, max_nn=max_nn
+                ),
+                fast_normal_computation=fast_normal_computation,
             )
 
             # Apply a uniform color to the point cloud from params.yaml
@@ -80,11 +90,14 @@ class Dataloader:
                 else:
                     print(f"Failed to save the normalized point cloud to {output_file}")
 
+
 if __name__ == "__main__":
     """
     Main execution function that initializes the Dataloader class,
     loads the point cloud, normalizes it, and saves it if required.
     """
-    dl = Dataloader()  # Initialize the Dataloader class with default config and params file paths
+    dl = (
+        Dataloader()
+    )  # Initialize the Dataloader class with default config and params file paths
     pcl = dl.load_point_cloud()  # Load the point cloud
     dl.normalize_and_save(pcl)  # Normalize and save the point cloud
