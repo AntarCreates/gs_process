@@ -1,0 +1,27 @@
+stages:
+  load:
+    cmd: python src/gs_process/pipeline/dataloader.py
+    deps:
+      - src/gs_process/pipeline/dataloader.py
+      - params.yaml
+    outs:
+      - output/cave_normalized.ply
+
+  ransac:
+    cmd: python src/gs_process/pipeline/ransac.py
+    deps:
+      - src/gs_process/pipeline/ransac.py
+      - output/cave_normalized.ply
+      - params.yaml
+    outs:
+      - output/cave_normalized_ransac_object.ply
+      - output/cave_normalized_ransac_noise.ply
+
+  dbscan:
+    cmd: python src/gs_process/pipeline/dbscan.py
+    deps:
+      - src/gs_process/pipeline/dbscan.py
+      - output/cave_normalized_ransac_object.ply
+      - params.yaml
+    outs:
+      - output/cave_dbscan.ply

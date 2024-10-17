@@ -1,0 +1,23 @@
+# Parameters for point cloud normalization
+estimate_normals:
+  search_param:
+    type: o3d.geometry.KDTreeSearchParamHybrid
+    radius: 0.1
+    max_nn: 16
+  fast_normal_computation: true
+  paint_uniform_color:
+    color: [0.0, 0.6, 0.0]  # Uniform color for the normalized point cloud
+
+# Parameters for RANSAC segmentation
+segment_plane:
+  distance_threshold: 400.16  # Threshold distance to the plane
+  ransac_n: 5  # Number of points to fit a plane
+  num_iterations: 1000  # Maximum number of iterations for RANSAC
+  colors:  # Colors for the object and noise clouds
+    object_cloud: [0.0, 0.0, 1.0]  # Blue color for detected objects
+    noise_cloud: [1.0, 1.0, 1.0]  # White color for noise
+
+# Parameters for DBSCAN clustering
+cluster_dbscan:
+  eps: 70.05  # Epsilon parameter for DBSCAN
+  min_points: 8  # Minimum number of points in a cluster

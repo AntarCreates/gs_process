@@ -1,0 +1,9 @@
+pcl_path: data/cave.xyz
+norm_pcl_path: output/cave_normalized.ply
+ransac_pcl_path: output/cave_normalized_ransac_object.ply
+
+process:
+  normalize: True
+  save_norm: True
+  save_ransac: True
+  save_dbscan: True

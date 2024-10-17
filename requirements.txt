@@ -1,0 +1,8 @@
+open3d
+numpy
+dvc
+matplotlib
+pyYAML
+notebook
+
+-e .

@@ -1,0 +1,62 @@
+schema: '2.0'
+stages:
+  load:
+    cmd: python src/gs_process/pipeline/dataloader.py
+    deps:
+    - path: params.yaml
+      hash: md5
+      md5: 773b66b3b5583acc970ce9f9c7ccbc07
+      size: 849
+    - path: src/gs_process/pipeline/dataloader.py
+      hash: md5
+      md5: 5248bf53283ba73eeebb052d012a3213
+      size: 3740
+    outs:
+    - path: output/cave_normalized.ply
+      hash: md5
+      md5: c74ab03a7be59d7b47c3d09f11880484
+      size: 846049
+  ransac:
+    cmd: python src/gs_process/pipeline/ransac.py
+    deps:
+    - path: output/cave_normalized.ply
+      hash: md5
+      md5: c74ab03a7be59d7b47c3d09f11880484
+      size: 846049
+    - path: params.yaml
+      hash: md5
+      md5: 773b66b3b5583acc970ce9f9c7ccbc07
+      size: 849
+    - path: src/gs_process/pipeline/ransac.py
+      hash: md5
+      md5: c939447983e88514ee53bf0e977eb596
+      size: 3237
+    outs:
+    - path: output/cave_normalized_ransac_noise.ply
+      hash: md5
+      md5: 5aae2b5382ce88b56d49ba762f4d53ba
+      size: 5771
+    - path: output/cave_normalized_ransac_object.ply
+      hash: md5
+      md5: c1a8870059e78534a48770904b3874b9
+      size: 840541
+  dbscan:
+    cmd: python src/gs_process/pipeline/dbscan.py
+    deps:
+    - path: output/cave_normalized_ransac_object.ply
+      hash: md5
+      md5: c1a8870059e78534a48770904b3874b9
+      size: 840541
+    - path: params.yaml
+      hash: md5
+      md5: 773b66b3b5583acc970ce9f9c7ccbc07
+      size: 849
+    - path: src/gs_process/pipeline/dbscan.py
+      hash: md5
+      md5: 755cfeb2db181a84c645599868f397f3
+      size: 2450
+    outs:
+    - path: output/cave_dbscan.ply
+      hash: md5
+      md5: 3549fa1fab672071e2cd2b0615c0b287
+      size: 840541

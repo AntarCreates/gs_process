@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+src/gs_process/__init__.py
+src/gs_process.egg-info/PKG-INFO
+src/gs_process.egg-info/SOURCES.txt
+src/gs_process.egg-info/dependency_links.txt
+src/gs_process.egg-info/top_level.txt
+src/gs_process/constants/__init__.py
+src/gs_process/pipeline/__init__.py
+src/gs_process/utils/__init__.py
+src/gs_process/utils/common.py
