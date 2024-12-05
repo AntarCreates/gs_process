@@ -3,6 +3,8 @@
 
 A simple pipeline for point cloud processing using **Open3D** and **DVC** for reproducibility. The demo uses a point cloud scene processed from a Gaussian Splat. The pipeline has three key stages: dataloader, plane segmentation using RANSAC, and clustering using DBSCAN. All configurations are managed via the `params.yaml` file.
 
+This is a dvc pipeline wrapper of the same ipynb program I leveraged for segmenting Martian lava cave point cloud using [big_bot_description](https://github.com/AntarCreates/big_bot_description)
+
 ## Project Structure
 ```
 ├── src
